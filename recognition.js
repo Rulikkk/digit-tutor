@@ -11,15 +11,19 @@ const SpeechRecognition =
     locale.getCurrentLocale().numbers.join(" | ") +
     " ;";
 
-const recognition = new SpeechRecognition(),
+let recognition, speechRecognitionList;
+
+if (SpeechRecognition && SpeechGrammarList) {
+  recognition = new SpeechRecognition();
   speechRecognitionList = new SpeechGrammarList();
 
-speechRecognitionList.addFromString(grammar, 1);
+  speechRecognitionList.addFromString(grammar, 1);
 
-recognition.grammars = speechRecognitionList;
-recognition.continuous = true;
-recognition.lang = locale.getCurrentLocaleCode();
-recognition.interimResults = true;
-recognition.maxAlternatives = 1;
+  recognition.grammars = speechRecognitionList;
+  recognition.continuous = true;
+  recognition.lang = locale.getCurrentLocaleCode();
+  recognition.interimResults = true;
+  recognition.maxAlternatives = 1;
+}
 
 export default recognition;

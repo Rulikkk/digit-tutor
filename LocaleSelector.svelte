@@ -16,7 +16,7 @@
     bind:value={selectedLocaleCode} 
     on:change={() => { 
       locale.setLocale(selectedLocaleCode); 
-      recognition.lang = locale.getCurrentLocaleCode();
+      if (recognition) recognition.lang = locale.getCurrentLocaleCode();
     }}>
     {#each locale.getAvailableLocales() as [code, name]}
 		  <option value="{code}">{name}</option>

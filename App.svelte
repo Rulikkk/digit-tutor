@@ -9,6 +9,7 @@
     STARTED = "STARTED",
     FAILED = "FAILED",
     GUESSED = "GUESSED",
+    NO_RECOGNITION = "NO_RECOGNITION",
     SUCCESS_EMOJI = "✅",
     FAIL_EMOJI = "⛔️",
     TIMEOUT = 900;
@@ -56,30 +57,34 @@
     }, TIMEOUT);
   }
 
-  recognition.onresult = function(event) {
-    console.log(event);
-    const result = event.results[event.resultIndex];
-    const transcript = result[0].transcript.toLowerCase();
-    hint = transcript;
-    console.log("Result received: " + transcript + ".");
-    console.log("Confidence: " + result.confidence);
-    if (
-      transcript.indexOf(digit) >= 0 ||
-      transcript.indexOf($l.numbers[digit]) >= 0
-    ) {
-      onCorrectDigit();
-    } else {
-      // onFail();
-    }
-  };
+  if (recognition) {
+    recognition.onresult = function(event) {
+      console.log(event);
+      const result = event.results[event.resultIndex];
+      const transcript = result[0].transcript.toLowerCase();
+      hint = transcript;
+      console.log("Result received: " + transcript + ".");
+      console.log("Confidence: " + result.confidence);
+      if (
+        transcript.indexOf(digit) >= 0 ||
+        transcript.indexOf($l.numbers[digit]) >= 0
+      ) {
+        onCorrectDigit();
+      } else {
+        // onFail();
+      }
+    };
 
-  recognition.onnomatch = function(event) {
-    console.log("No match...");
-  };
+    recognition.onnomatch = function(event) {
+      console.log("No match...");
+    };
 
-  recognition.onerror = function(event) {
-    console.log(`Error: ${event.error}`);
-  };
+    recognition.onerror = function(event) {
+      console.log(`Error: ${event.error}`);
+    };
+  } else {
+    setGameState(NO_RECOGNITION);
+  }
 
   function start() {
     recognition.start();
@@ -117,6 +122,11 @@
     margin: 1em auto;
   }
 
+  main p.err {
+    color: red;
+    font-weight: bold;
+  }
+
   article {
     margin: 0 auto;
     padding: 0;
@@ -132,14 +142,16 @@
 
 <main>
 	<h1>{$l.header}</h1>
-  {#if gameState == STARTING}
+  {#if gameState == STARTING || gameState == NO_RECOGNITION}
     <LocaleSelector />
   {/if}
   <p>{$l.info}</p>
   {#if gameState == STARTING}
 	  <Button on:click={start} />
-  {:else}
+  {:else if gameState == STARTED}
     <article><h1>{emoji || digit}</h1></article>
+    <p><small>{$l.hint}</small> {hint || $l.nothingYet}</p>
+  {:else if gameState == NO_RECOGNITION}
+    <p class="err">{$l.noRecognitionError}<p>
   {/if}
-  <p><small>{$l.hint}</small> {hint || $l.nothingYet}</p>
 </main>

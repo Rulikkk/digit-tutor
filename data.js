@@ -19,10 +19,12 @@ const locales = {
       "seven",
       "eight",
       "nine"
-    ]
+    ],
+    noRecognitionError:
+      "Your browser does not seem to support speech recognition. Only Chrome supports it as of now. Please, use Chrome."
   },
   ru: {
-    header: "Учебник цифр",
+    header: "Учебник Цифр",
     info:
       "Нужно произнести вслух цифру, показанную на экране. Также, надо дать доступ к микрофону. Если что-то не так — обновите страницу. Работает только в Chrome.",
     start: "Начать!",
@@ -41,7 +43,9 @@ const locales = {
       "семь",
       "восемь",
       "девять"
-    ]
+    ],
+    noRecognitionError:
+      "Похоже, Ваш браузер не поддерживает распознавание речи. На данный момент, распознавание работает только в Хроме. Пожалуйста, откройте игру в Хроме."
   }
 };
 
