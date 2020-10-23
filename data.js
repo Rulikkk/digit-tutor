@@ -1,6 +1,6 @@
 const locales = {
   en: {
-    header: "Digit Pronounciation Tutorial",
+    header: "Digit Tutor",
     info:
       "Pronounce the digit that You see. Don't forget to allow microphone access. In case of any issue — reload the page. Only Chrome and Firefox supported.",
     start: "Start!",
@@ -22,7 +22,7 @@ const locales = {
     ]
   },
   ru: {
-    header: "Учебник произношения цифр",
+    header: "Учебник цифр",
     info:
       "Нужно произнести вслух цифру, показанную на экране. Также, надо дать доступ к микрофону. Если что-то не так — обновите страницу. Работает только в Chrome & Firefox.",
     start: "Начать!",

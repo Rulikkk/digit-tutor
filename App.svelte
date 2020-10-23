@@ -130,7 +130,6 @@
   }
 </style>
 
-
 <main>
 	<h1>{$l.header}</h1>
   {#if gameState == STARTING}
