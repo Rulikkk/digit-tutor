@@ -15,6 +15,9 @@ const getInitialLocale = () => {
 };
 
 let currentLocaleCode = getInitialLocale().substr(0, 2);
+
+if (!(currentLocaleCode in locales)) currentLocaleCode = "en";
+
 let currentLocale = locales[currentLocaleCode];
 
 console.log(`Initial locale ${currentLocaleCode}`);

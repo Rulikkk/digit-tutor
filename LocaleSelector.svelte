@@ -1,7 +1,7 @@
 <script>
   import { locale } from "./locale.js";
   import recognition from "./recognition.js";
-  let selectedLocaleCode;
+  let selectedLocaleCode = locale.getCurrentLocaleCode();
 </script>
 
 <style>
